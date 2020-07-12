@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.dao.UserDao">
+
+    <select id="getUser" resultType="com.modules.entities.User">
+        select * from user
+        <where>
+            <if test="username!=null and username!=''">
+                and username like '%${username}%'
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getUserById" resultType="com.modules.entities.User">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO `user`
+        (
+          `username`,
+          `real_name`,
+          `password`,
+          `gender`,
+          `birthday`,
+          `user_type`
+        )
+        VALUES (
+         #{username},
+         #{realName},
+         #{password},
+         #{gender},
+         #{birthday},
+         #{userType}
+        )
+    </insert>
+
+
+    <update id="updateUser" parameterType="com.modules.entities.User">
+        UPDATE `user` SET
+        <set>
+            <if test="username!=null and username!=''">
+                username = #{username},
+            </if>
+            <if test="realName!=null and realName!=''">
+                real_name = #{realName},
+            </if>
+            <if test="gender!=null and gender!=''">
+                gender = #{gender},
+            </if>
+            <if test="birthday!=null and birthday!=''">
+                birthday = #{birthday},
+            </if>
+            <if test="userType!=null and userType!=''">
+                user_type = #{userType},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUserByPid">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="selectPassword" resultType="string">
+        select password from user where username = #{username}
+    </select>
+
+    <update id="updatePassword" parameterType="string">
+        UPDATE user SET
+        password=#{news}
+        WHERE username=#{name} and password=#{old}
+    </update>
+
+</mapper>

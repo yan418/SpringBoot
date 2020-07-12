@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" >
+    <meta charset="UTF-8">
+    <title>账单管理系统</title>
+
+</head>
+<body>
+<!-- 公共模板 组件 -->
+
+    <!--头部-->
+    <header class="publicHeader" id="publicHeader">
+        <h1>账单管理系统</h1>
+        <div class="publicHeaderR">
+            <p><span>下午好！</span><span style="color: #fff21b" th:text="${session.LoginState}"> Admin</span> , 欢迎你！</p>
+            <a href="/doQuit">退出</a>
+        </div>
+    </header>
+
+    <!--顶部-->
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" id="publicTop">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:text="${session.LoginState}" style="color: white"></a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="doQuit">退出</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--时间-->
+    <section class="publicTime" id="publicTime">
+        <span id="time">2028年01月01日 11:11  星期一</span>
+        <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
+    </section>
+
+    <!--主体内容-->
+    <section class="publicMian ">
+        <div class="left" id="publicMianLeft">
+            <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
+            <nav>
+                <ul class="list">
+                    <li  th:id="${nav=='bill'?'active':''}"><a href="/bills">账单管理</a></li>
+                    <li  th:id="${nav=='provider'?'active':''}"><a href="/providers">供应商管理</a></li>
+                    <li  th:id="${nav=='users'?'active':''}"><a href="/users"  >用户管理</a></li>
+                    <li  th:id="${nav=='pwd'?'active':''}"><a href="/user/pwd" >密码修改</a></li>
+                    <li><a href="/doQuit">退出系统</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="right">
+           公共页面
+        </div>
+    </section>
+    <footer class="footer" id="footer">
+        <div style="text-align:center;">	<p><a href="http://www.goodysr.cn/" target="_blank">梦想大师</a> 版权所有</p></div>
+    </footer>
+
+    <!--导航-->
+    <ul class="nav flex-column" id="publicNav">
+        <li class="nav-item">
+            <a th:class="${nav=='list'?'nav-link active' : 'nav-link' }" href="list">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                用户列表 <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${nav=='chat'?'nav-link active' : 'nav-link' }" href="chat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                    <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                其他列表
+            </a>
+        </li>
+    </ul>
+
+</body>
+</html>

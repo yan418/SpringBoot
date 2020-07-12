@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Signin Template for Bootstrap</title>
+		<link th:href="@{asserts/css/bootstrap.min.css}" rel="stylesheet">
+		<link th:href="@{asserts/css/signin.css}" rel="stylesheet">
+	</head>
+
+	<body class="text-center">
+		<form class="form-signin" action="doLogin" method="post">
+			<img class="mb-4" th:src="@{asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
+			<h1 class="h3 mb-3 font-weight-normal">[[#{login_home}]]</h1>
+			<p th:if="${not #strings.isEmpty(loginMsg)}"  th:text="${loginMsg}" style="color:red;"></p>
+			<label class="sr-only">[[#{login_username}]]</label>
+			<input type="text" class="form-control" required="" autofocus="" th:placeholder="#{login_username}" name="username">
+			<label class="sr-only">[[#{login_password}]]</label>
+			<input type="password" class="form-control" required="" th:placeholder="#{login_password}" name="password">
+			<div class="checkbox mb-3">
+				<label>
+          <input type="checkbox" value="remember-me"> [[#{login_remember}]]
+        </label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">[[#{login_home}]]</button>
+			<a class="btn btn-sm" href="/index?l=CN">中文</a>
+			<a class="btn btn-sm" href="/index?l=US">English</a>
+<!--			<a class="btn btn-sm" th:href="@{/index(l='CN')}">中文</a>-->
+<!--			<a class="btn btn-sm" th:href="@{/index(l='US')}">English</a>-->
+<!--			<a th:utext=""></a>  显示HTML代码 -->
+<!--			X-admin 后台框架  -->
+		</form>
+
+	</body>
+
+</html>

@@ -1,0 +1,47 @@
+server:
+  port: 9090
+spring:
+  thymeleaf:
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    # 前端上传日期格式，定义形式
+    date-format: yyyy-MM-dd
+  #国际化, 双语
+  messages:
+    basename: i18n.home
+  datasource:
+    username: root
+    password: root
+    #mysql8版本以上的驱动包，需要指定以下时区
+    url: jdbc:mysql://127.0.0.1:3306/bill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #引入Druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的 filters，去掉后监控界面 sql 无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+#配置mybatis相关文件路径
+mybatis:
+  #映射配置文件路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  #核心配置文件路径
+  config-location: classpath:mybatis/mybatis-config.xml
+

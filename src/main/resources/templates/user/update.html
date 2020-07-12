@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>账单管理系统</title>
+    <link rel="stylesheet" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+<!--头部-->
+<header th:replace="main/public :: #publicHeader"></header>
+<!--时间-->
+<section th:replace="main/public :: #publicTime"></section>
+<!--主体内容-->
+<section class="publicMian">
+    <div class="left" th:replace="main/public :: #publicMianLeft(nav='users')"></div>
+    </div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面 >> 用户修改页面</span>
+        </div>
+        <div class="providerAdd">
+            <form action="/user" id="updateForm" method="post" >
+                <input type="hidden"  name="_method" value="put">
+                <input type="hidden" id="id" name="id" th:value="${user.id}">
+                <input th:type="hidden" name="username" th:value="${user.username}">
+
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div>
+                    <label for="realName">真实姓名：</label>
+                    <input type="text" name="realName" id="realName" placeholder="" th:value="${user.username}"/>
+                    <span>*</span>
+                </div>
+
+                <div>
+                    <label >用户性别：</label>
+
+                    <select name="gender" >
+                        <option value="1" th:selected="${user.gender==1}">女</option>
+                        <option value="2" th:selected="${user.gender==2}">男</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="birthday">出生日期：</label>
+                    <input type="text" name="birthday" id="birthday" th:value="${#dates.format(user.birthday, 'yyyy/MM/dd')}"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label >用户类别：</label>
+                    <input type="radio" name="userType" value="1" th:checked="${user.userType==1}"/>管理员
+                    <input type="radio" name="userType" value="2" th:checked="${user.userType==2}"/>经理
+                    <input type="radio" name="userType" value="3" th:checked="${user.userType==3}"/>普通用户
+                </div>
+                <div class="providerAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="userList.html">返回</a>-->
+                    <input type="button" value="保存" onclick="update()"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+<footer class="footer" th:replace="main/public :: #footer"></footer>
+<script src="../js/jquery.js"></script>
+<script>
+    function update(){
+        $('#updateForm').submit()
+    }
+</script>
+</body>
+</html>
